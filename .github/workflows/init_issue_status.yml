@@ -1,0 +1,24 @@
+name: Init Issue Status
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  init_issue_status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download script file
+        run: curl -O https://raw.githubusercontent.com/Lesords/actions/refs/heads/main/tools/init_issue_status.sh
+
+      - name: Make script executable
+        run: chmod u+x init_issue_status.sh
+
+      - name: Run downloaded script
+        run: ./init_issue_status.sh ${{ github.event.issue.number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
