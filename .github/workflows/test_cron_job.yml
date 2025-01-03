@@ -2,11 +2,8 @@ name: Test Jobs
 
 on:
   workflow_dispatch:
-    inputs:
-      work:
-        description: 'work'
-        required: true
-        type: string
+  # schedule:
+  #   - cron: '0 4 * * *'
 
 jobs:
   test-jobs:
