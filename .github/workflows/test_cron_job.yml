@@ -1,0 +1,30 @@
+name: Test Jobs
+
+on:
+  workflow_dispatch:
+    inputs:
+      work:
+        description: 'work'
+        required: true
+        type: string
+
+jobs:
+  test-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Checkout script repository
+        uses: actions/checkout@v4
+        with:
+          # repository: Seeed-Studio/sync-github-all-issues
+          repository: Lesords/actions
+          path: ci
+
+      - name: Run script
+        run: ./tools/addPr2Project.sh
+        env:
+          # PROJECT_ID: "17"
+          PROJECT_ID: "3"
+          GITHUB_TOKEN: ${{ secrets.Lesords }}
